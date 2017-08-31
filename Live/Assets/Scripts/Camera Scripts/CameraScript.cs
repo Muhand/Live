@@ -39,10 +39,10 @@ public class CameraScript : MonoBehaviour {
     {
         Vector3 temp = transform.position;
         float oldY = temp.y;
-        float newY = temp.y - (speed * Time.deltaTime);
+        float newY = temp.y - (speed * Time.fixedDeltaTime);
         temp.y = Mathf.Clamp(temp.y, oldY, newY);
         transform.position = temp;
-        speed += acceleration * Time.deltaTime;
+        speed += acceleration * Time.fixedDeltaTime;
 
         if (speed > maxSpeed)
             speed = maxSpeed;

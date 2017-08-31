@@ -14,6 +14,8 @@ public class GameManager : MonoBehaviour {
     public int score, coinScore, lifeScore;
 
 	void Awake () {
+        QualitySettings.vSyncCount = 0;  // VSync must be disabled
+        Application.targetFrameRate = 45;
         MakeSingleton();
 	}
 
