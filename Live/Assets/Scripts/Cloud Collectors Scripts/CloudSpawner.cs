@@ -8,7 +8,7 @@ public class CloudSpawner : MonoBehaviour {
     private GameObject[] clouds;
     [SerializeField]
     private GameObject[] collectables;
-    private float distanceBetweenClouds = 3f;
+    private float distanceBetweenClouds = 2.25f;
     private float minX, maxX;
     private float lastCloudPositionY;
     private float controlX;
@@ -54,6 +54,19 @@ public class CloudSpawner : MonoBehaviour {
             int random = Random.Range(i, cloudsToShuffle.Length);
             cloudsToShuffle[i] = cloudsToShuffle[random];
             cloudsToShuffle[random] = temp;
+
+            //If we have more than 1 cloud
+            if(i>0)
+            {
+                //Check if the previous cloud is deadly or not, if it's deadly then replace it with the next one, 
+                //this way we avoid any 2 deadly clouds after each other
+                if(cloudsToShuffle[i-1].tag == "Deadly" && cloudsToShuffle[i].tag == "Deadly")
+                {
+                    temp = cloudsToShuffle[i];
+                    cloudsToShuffle[i] = cloudsToShuffle[i+1];
+                    cloudsToShuffle[i + 1] = temp;
+                }
+            }
 
         }
     }
